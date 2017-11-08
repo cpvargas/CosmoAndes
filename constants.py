@@ -11,12 +11,12 @@ Y_width = N*pix_size/60.  # vertical map width in degrees
 
 beam_size_fwhp = 1.25
 
-Number_of_Sources  = 5000.
-Amplitude_of_Sources = 200.
-Number_of_Sources_EX = 50.
-Amplitude_of_Sources_EX = 1000.
-Number_of_SZ_Clusters  = 500.
-Mean_Amplitude_of_SZ_Clusters = 50.
+Number_of_Sources  = 5000
+Amplitude_of_Sources = 200
+Number_of_Sources_EX = 50
+Amplitude_of_Sources_EX = 1000
+Number_of_SZ_Clusters  = 500
+Mean_Amplitude_of_SZ_Clusters = 50
 SZ_beta = 0.86
 SZ_Theta_core = 1.0
 

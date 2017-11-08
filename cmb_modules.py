@@ -33,7 +33,7 @@ def make_CMB_T_map(N,pix_size,ell,DlTT):
     # now make a 2d CMB power spectrum
     ell_scale_factor = 2. * np.pi / (pix_size/60. * np.pi/180.)
     ell2d = R * ell_scale_factor
-    ClTT_expanded = np.zeros(ell2d.max()+1)
+    ClTT_expanded = np.zeros(int(ell2d.max())+1)
     ClTT_expanded[0:(ClTT.size)] = ClTT
     CLTT2d = ClTT_expanded[ell2d.astype(int)]
     ## make a plot of the 2d cmb power spectrum, note the x and y axis labels need to be fixed
@@ -79,12 +79,15 @@ def Plot_CMB_Map(Map_to_Plot,c_min,c_max,X_width,Y_width):
   ###############################
 
 def Poisson_source_component(N,pix_size,Number_of_Sources,Amplitude_of_Sources):
-    "makes a realization of a nieve pointsource map"
-    PSMap = np.zeros([N,N])
-    i = 0.
-    while (i < Number_of_Sources):
-        pix_x = N*np.random.rand() 
-        pix_y = N*np.random.rand() 
+    "makes a realization of a naive Poisson-distributed point source map"
+    PSMap = np.zeros([np.int(N),np.int(N)])
+    print(PSMap)
+    i = 0
+    print('Number of sources required: ', Number_of_Sources)
+    print(int(N*np.random.rand()))
+    while (i < int(Number_of_Sources)):
+        pix_x = np.int(N*np.random.rand())
+        pix_y = np.int(N*np.random.rand())
         PSMap[pix_x,pix_y] += np.random.poisson(Amplitude_of_Sources)
         i = i + 1
 
@@ -92,12 +95,12 @@ def Poisson_source_component(N,pix_size,Number_of_Sources,Amplitude_of_Sources):
   ############################### 
 
 def Exponential_source_component(N,pix_size,Number_of_Sources_EX,Amplitude_of_Sources_EX):
-    "makes a realization of a nieve pointsource map"
+    "makes a realization of a naive exponentially-distributed point source map"
     PSMap = np.zeros([N,N])
     i = 0.
     while (i < Number_of_Sources_EX):
-        pix_x = N*np.random.rand() 
-        pix_y = N*np.random.rand() 
+        pix_x = int(N*np.random.rand() )
+        pix_y = int(N*np.random.rand()) 
         PSMap[pix_x,pix_y] += np.random.exponential(Amplitude_of_Sources_EX)
         i = i + 1
 
