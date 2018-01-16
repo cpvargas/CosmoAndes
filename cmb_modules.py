@@ -24,6 +24,7 @@ def make_CMB_T_map(N,pix_size,ell,DlTT):
     ClTT[1] = 0.
 
     # make a 2d coordinate system
+    N=int(N)
     ones = np.ones(N)
     inds  = (np.arange(N)+.5 - N/2.) /(N-1.)
     X = np.outer(ones,inds)
@@ -95,6 +96,7 @@ def Poisson_source_component(N,pix_size,Number_of_Sources,Amplitude_of_Sources):
   ############################### 
 
 def Exponential_source_component(N,pix_size,Number_of_Sources_EX,Amplitude_of_Sources_EX):
+    N=int(N)
     "makes a realization of a naive exponentially-distributed point source map"
     PSMap = np.zeros([N,N])
     i = 0.
@@ -109,6 +111,7 @@ def Exponential_source_component(N,pix_size,Number_of_Sources_EX,Amplitude_of_So
 
 def SZ_source_component(N,pix_size,Number_of_SZ_Clusters,Mean_Amplitude_of_SZ_Clusters,SZ_beta,SZ_Theta_core,do_plots):
     "makes a realization of a nieve SZ map"
+    N=int(N)
     SZMap = np.zeros([N,N])
     SZcat = np.zeros([3,Number_of_SZ_Clusters]) ## catalogue of SZ sources, X, Y, amplitude
     # make a distribution of point sources with varying amplitude
@@ -187,43 +190,44 @@ def make_2d_gaussian_beam(N,pix_size,beam_size_fwhp):
   ###############################  
 
 def make_noise_map(N,pix_size,white_noise_level,atnospheric_noise_level,one_over_f_noise_level):
-    "makes a realization of instrument noise, atnospher and 1/f noise level set at 1 degrees"
+    "makes a realization of instrument noise, atmosphere and 1/f noise level set at 1 degrees"
     ## make a white noise map
     white_noise = np.random.normal(0,1,(N,N)) * white_noise_level/pix_size
  
-    ## make an atnosperhic noise map
-    atnospheric_noise = 0.
-    if (atnospheric_noise_level != 0):
+    ## make an atmosperhic noise map
+    atmospheric_noise = 0.
+    if (atmospheric_noise_level != 0):
         ones = np.ones(N)
         inds  = (np.arange(N)+.5 - N/2.) 
         X = np.outer(ones,inds)
         Y = np.transpose(X)
-        R = np.sqrt(X**2. + Y**2.) * pix_size /60. ## angles realative to 1 degrees  
+        R = np.sqrt(X**2. + Y**2.) * pix_size /60. ## angles relative to 1 degrees  
         mag_k = 2 * np.pi/(R+.01)  ## 0.01 is a regularizaiton factor
-        atnospheric_noise = np.fft.fft2(np.random.normal(0,1,(N,N)))
-        atnospheric_noise  = np.fft.ifft2(atnospheric_noise * np.fft.fftshift(mag_k**(5/3.)))* atnospheric_noise_level/pix_size
+        atmospheric_noise = np.fft.fft2(np.random.normal(0,1,(N,N)))
+        atmospheric_noise  = np.fft.ifft2(atmospheric_noise * np.fft.fftshift(mag_k**(5/3.)))* atmospheric_noise_level/pix_size
 
     ## make a 1/f map, along a single direction to illustrate striping 
     oneoverf_noise = 0.
     if (one_over_f_noise_level != 0): 
         ones = np.ones(N)
         inds  = (np.arange(N)+.5 - N/2.) 
-        X = np.outer(ones,inds) * pix_size /60. ## angles realative to 1 degrees 
+        X = np.outer(ones,inds) * pix_size /60. ## angles relative to 1 degrees 
         kx = 2 * np.pi/(X+.01) ## 0.01 is a regularizaiton factor
         oneoverf_noise = np.fft.fft2(np.random.normal(0,1,(N,N)))
         oneoverf_noise = np.fft.ifft2(oneoverf_noise * np.fft.fftshift(kx))* one_over_f_noise_level/pix_size
 
     ## return the noise map
-    noise_map = np.real(white_noise + atnospheric_noise + oneoverf_noise)
+    noise_map = np.real(white_noise + atmospheric_noise + oneoverf_noise)
     return(noise_map)
   ###############################
 def Filter_Map(Map,N,N_mask):
+    N=int(N)
     ## set up a x, y, and r coordinates for mask generation
     ones = np.ones(N)
     inds  = (np.arange(N)+.5 - N/2.) 
     X = np.outer(ones,inds)
     Y = np.transpose(X)
-    R = np.sqrt(X**2. + Y**2.)  ## angles realative to 1 degrees  
+    R = np.sqrt(X**2. + Y**2.)  ## angles relative to 1 degrees  
     
     ## make a mask
     mask  = np.ones([N,N])
@@ -274,7 +278,7 @@ def average_N_spectra(spectra,N_spectra,N_ells):
     return(avgSpectra,rmsSpectra)
 
 def calculate_2d_spectrum(Map,delta_ell,ell_max,pix_size,N):
-    "calcualtes the power spectrum of a 2d map by FFTing, squaring, and azimuthally averaging"
+    "calculates the power spectrum of a 2d map by FFTing, squaring, and azimuthally averaging"
     import matplotlib.pyplot as plt
     # make a 2d ell coordinate system
     ones = np.ones(N)
