@@ -191,7 +191,7 @@ def make_2d_gaussian_beam(N,pix_size,beam_size_fwhp):
     return(gaussian)
   ###############################  
 
-def make_noise_map(N,pix_size,white_noise_level,atnospheric_noise_level,one_over_f_noise_level):
+def make_noise_map(N,pix_size,white_noise_level,atmospheric_noise_level,one_over_f_noise_level):
     "makes a realization of instrument noise, atmosphere and 1/f noise level set at 1 degrees"
     ## make a white noise map
     N=int(N)
