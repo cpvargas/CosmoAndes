@@ -117,8 +117,8 @@ def SZ_source_component(N,pix_size,Number_of_SZ_Clusters,Mean_Amplitude_of_SZ_Cl
     # make a distribution of point sources with varying amplitude
     i = 0
     while (i < Number_of_SZ_Clusters):
-        pix_x = N*np.random.rand() 
-        pix_y = N*np.random.rand() 
+        pix_x = np.int(N*np.random.rand())
+        pix_y = np.int(N*np.random.rand() )
         pix_amplitude = np.random.exponential(Mean_Amplitude_of_SZ_Clusters)*(-1.)
         SZcat[0,i] = pix_x
         SZcat[1,i] = pix_y
