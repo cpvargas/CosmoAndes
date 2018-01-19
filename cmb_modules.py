@@ -146,6 +146,7 @@ def SZ_source_component(N,pix_size,Number_of_SZ_Clusters,Mean_Amplitude_of_SZ_Cl
 
 def beta_function(N,pix_size,SZ_beta,SZ_Theta_core):
   # make a beta function
+    N=int(N)
     ones = np.ones(N)
     inds  = (np.arange(N)+.5 - N/2.) * pix_size
     X = np.outer(ones,inds)
@@ -174,6 +175,7 @@ def convolve_map_with_gaussian_beam(N,pix_size,beam_size_fwhp,Map):
 
 def make_2d_gaussian_beam(N,pix_size,beam_size_fwhp):
      # make a 2d coordinate system
+    N=int(N)
     ones = np.ones(N)
     inds  = (np.arange(N)+.5 - N/2.) * pix_size
     X = np.outer(ones,inds)
@@ -281,6 +283,7 @@ def calculate_2d_spectrum(Map,delta_ell,ell_max,pix_size,N):
     "calculates the power spectrum of a 2d map by FFTing, squaring, and azimuthally averaging"
     import matplotlib.pyplot as plt
     # make a 2d ell coordinate system
+    N=int(N)
     ones = np.ones(N)
     inds  = (np.arange(N)+.5 - N/2.) /(N-1.)
     kX = np.outer(ones,inds) / (pix_size/60. * np.pi/180.)
