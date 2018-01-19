@@ -99,7 +99,7 @@ def Exponential_source_component(N,pix_size,Number_of_Sources_EX,Amplitude_of_So
     N=int(N)
     "makes a realization of a naive exponentially-distributed point source map"
     PSMap = np.zeros([N,N])
-    i = 0.
+    i = 0
     while (i < Number_of_Sources_EX):
         pix_x = int(N*np.random.rand() )
         pix_y = int(N*np.random.rand()) 
@@ -115,7 +115,7 @@ def SZ_source_component(N,pix_size,Number_of_SZ_Clusters,Mean_Amplitude_of_SZ_Cl
     SZMap = np.zeros([N,N])
     SZcat = np.zeros([3,Number_of_SZ_Clusters]) ## catalogue of SZ sources, X, Y, amplitude
     # make a distribution of point sources with varying amplitude
-    i = 0.
+    i = 0
     while (i < Number_of_SZ_Clusters):
         pix_x = N*np.random.rand() 
         pix_y = N*np.random.rand() 
