@@ -82,10 +82,9 @@ def Plot_CMB_Map(Map_to_Plot,c_min,c_max,X_width,Y_width):
 def Poisson_source_component(N,pix_size,Number_of_Sources,Amplitude_of_Sources):
     "makes a realization of a naive Poisson-distributed point source map"
     PSMap = np.zeros([np.int(N),np.int(N)])
-    print(PSMap)
     i = 0
     print('Number of sources required: ', Number_of_Sources)
-    print(int(N*np.random.rand()))
+    
     while (i < int(Number_of_Sources)):
         pix_x = np.int(N*np.random.rand())
         pix_y = np.int(N*np.random.rand())
